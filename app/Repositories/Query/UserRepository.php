@@ -47,6 +47,6 @@ class UserRepository implements UserRepositoryInterface
 
     public function show($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model->whereId($id)->first();
     }
 }

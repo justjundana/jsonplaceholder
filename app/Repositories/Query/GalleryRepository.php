@@ -25,7 +25,7 @@ class GalleryRepository implements GalleryRepositoryInterface
 
     public function show($id)
     {
-        return $this->model->findOrFail($id);
+        return $this->model->whereId($id)->first();
     }
 
     public function store(Request $request)
