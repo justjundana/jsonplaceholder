@@ -44,7 +44,7 @@ class GalleryRepository implements GalleryRepositoryInterface
 
     public function update(Request $request, $id)
     {
-        $gallery = $this->model->findOrFail($id);
+        $gallery = $this->model->whereId($id)->first();
 
         if ($request->image != null) {
             $path = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $gallery->image;
@@ -67,7 +67,7 @@ class GalleryRepository implements GalleryRepositoryInterface
 
     public function delete($id)
     {
-        $gallery = $this->model->findOrFail($id);
+        $gallery = $this->model->whereId($id)->first();
 
         $path = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . $gallery->image;
 
