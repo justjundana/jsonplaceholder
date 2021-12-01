@@ -51,7 +51,7 @@ class ApiGalleryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -64,14 +64,14 @@ class ApiGalleryController extends Controller
             return $this->responseData($gallery);
         }
 
-        return $this->responseDataNotFound('Failed to Add Data!');
+        return $this->responseError('Failed to Delete Data!', 400);
     }
 
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if ($validator->fails()) {
@@ -87,10 +87,10 @@ class ApiGalleryController extends Controller
                 return $this->responseData($data);
             }
 
-            return $this->responseError("You don't Have Permission to Update This Data!");
+            return $this->responseError("You don't Have Permission to Delete This Data!", 403);
         }
 
-        return $this->responseDataNotFound('Failed to Update Data!');
+        return $this->responseError('Failed to Delete Data!', 400);
     }
 
     public function destroy($id)
@@ -104,9 +104,9 @@ class ApiGalleryController extends Controller
                 return $this->responseData('Data Deleted Successfully!');
             }
 
-            return $this->responseError("You don't Have Permission to Delete This Data!");
+            return $this->responseError("You don't Have Permission to Delete This Data!", 403);
         }
 
-        return $this->responseDataNotFound('Failed to Delete Data!');
+        return $this->responseError('Failed to Delete Data!', 400);
     }
 }

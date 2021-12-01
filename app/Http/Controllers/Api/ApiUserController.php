@@ -28,13 +28,28 @@ class ApiUserController extends Controller
 
     public function register(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'street' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'postcode' => 'required',
+            'phone' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return $this->responseValidation($validator->errors());
+        }
+
         $user = $this->userService->registerService($request);
 
         if (!empty($user)) {
             return $this->responseData($user);
         }
 
-        return $this->responseDataNotFound('Failed to Register User!');
+        return $this->responseError('Failed to Register User!', 500);
     }
 
     public function login(Request $request)
@@ -59,7 +74,7 @@ class ApiUserController extends Controller
             ], 200);
         }
 
-        return $this->responseError('Your Email or Password Incorrect!');
+        return $this->responseError('Your Email or Password Incorrect!', 401);
     }
 
     public function index()
