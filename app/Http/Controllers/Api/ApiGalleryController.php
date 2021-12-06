@@ -64,7 +64,7 @@ class ApiGalleryController extends Controller
             return $this->responseData($gallery);
         }
 
-        return $this->responseError('Failed to Delete Data!', 400);
+        return $this->responseError('Failed to Create Data!', 400);
     }
 
     public function update(Request $request, $id)
@@ -87,10 +87,10 @@ class ApiGalleryController extends Controller
                 return $this->responseData($data);
             }
 
-            return $this->responseError("You don't Have Permission to Delete This Data!", 403);
+            return $this->responseError("You don't Have Permission to Update This Data!", 403);
         }
 
-        return $this->responseError('Failed to Delete Data!', 400);
+        return $this->responseError('Failed to Update Data!', 400);
     }
 
     public function destroy($id)
