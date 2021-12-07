@@ -43,13 +43,18 @@ class ApiUserController extends Controller
             return $this->responseValidation($validator->errors());
         }
 
-        $user = $this->userService->registerService($request);
+        $getEmail = $this->userService->getUserByEmailService($request->email);
 
-        if (!empty($user)) {
-            return $this->responseData($user);
+        if (empty($getEmail)) {
+            $user = $this->userService->registerService($request);
+
+            if (!empty($user)) {
+                return $this->responseData($user);
+            }    
+            return $this->responseError('Failed to Register User!', 500);
         }
 
-        return $this->responseError('Failed to Register User!', 500);
+        return $this->responseError('You are unable to use this email. Please use a different email address!', 409);
     }
 
     public function login(Request $request)

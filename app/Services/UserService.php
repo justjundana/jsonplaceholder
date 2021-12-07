@@ -33,4 +33,9 @@ class UserService
 	{
 		return $this->userRepository->show($id);
 	}
+
+	public function getUserByEmailService($email)
+	{
+		return $this->userRepository->email($email);
+	}
 }

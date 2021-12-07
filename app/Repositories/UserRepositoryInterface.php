@@ -33,4 +33,11 @@ interface UserRepositoryInterface
      * @return array
      */
     public function show($id);
+
+    /**
+     * Find User by Email.
+     * 
+     * @return array
+     */
+    public function email($email);
 }

@@ -175,6 +175,29 @@ class DocumentationController extends Controller
      *          }
      *      ),
      *      @OA\Response(
+     *          response="409",
+     *          description="Conflict",
+     *          content= {
+     *              @OA\MediaType(
+     *                  mediaType="application/json",
+     *                      @OA\Schema(
+     *                          @OA\Property(
+     *                              property="success",
+     *                              type="boolean"
+     *                          ),
+     *                          @OA\Property(
+     *                              property="message",
+     *                              type="string"
+     *                          ),
+     *                          example={
+     *                              "success": false,
+     *                              "message": "Error Message!",
+     *                          }
+     *                      )
+     *              )
+     *          }
+     *      ),
+     *      @OA\Response(
      *          response=422,
      *          description="Validation error",
      *          @OA\JsonContent(
